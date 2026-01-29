@@ -44,3 +44,47 @@ export const createWine = (req, res) => {
         data: newWine
     });
 };
+
+export const updateWine = (req, res) => {
+    const id = Number(req.params.id);
+    const { name, year } = req.body;
+
+    if (!name || !year) {
+        return res.status(400).json({
+            message: "PUT requires both name and year.",
+            data: null
+        });
+    }
+
+    const updatedWine = wineService.update(id, { name, year });
+
+    if (!updatedWine) {
+        return res.status(404).json({
+            message: `Wine with id ${id} not found.`,
+            data: null
+        });
+    }
+
+    res.status(200).json({
+        message: "Wine updated successfully.",
+        data: updatedWine
+    });
+};
+
+export const deleteWine = (req, res) => {
+    const id = Number(req.params.id);
+
+    const deleted = wineService.remove(id);
+
+    if (!deleted) {
+        return res.status(404).json({
+            message: `Wine with id ${id} not found.`,
+            data: null
+        });
+    }
+
+    res.status(200).json({
+        message: "Wine deleted successfully.",
+        data: null
+    });
+};

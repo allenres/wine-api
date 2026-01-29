@@ -6,5 +6,7 @@ const router = Router();
 router.get("/wines", wineCtl.getAllWines);
 router.get("/wines/:id", wineCtl.getWineById);
 router.post("/wines", wineCtl.createWine);
+router.put("/wines/:id", wineCtl.updateWine);
+router.delete("/wines/:id", wineCtl.deleteWine);
 
 export default router;
