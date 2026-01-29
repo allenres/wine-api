@@ -1,12 +1,9 @@
 import { Router } from "express";
+import * as wineCtl from "../controllers/wine.controller.js"
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.render("default", {
-        title: "MVC Starter App",
-        subtitle: "Express + EJS + Static Assets"
-    });
-});
+router.get("/wines", wineCtl.getAllWines);
+router.get("/wines/:id", wineCtl.getWineId);
 
 export default router;
